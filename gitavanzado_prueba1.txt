@@ -1,2 +1,3 @@
 "curso git avanzado" 
 "email agregado" 
+"mail anterior en git" 
