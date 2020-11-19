@@ -1,6 +1,3 @@
--- Ejercicios de https://josejuansanchez.org/bd/ejercicios-consultas-sql/index.html
-
-
 -- Ejercicio 1.1: Tienda de informatica 
 
 CREATE TABLE fabricante (
@@ -43,7 +40,26 @@ INSERT INTO producto VALUES('Impresora HP Laserjet Pro M26nw', 180, 3)
 SELECT nombre FROM producto;
 SELECT nombre,precio FROM producto;
 SELECT * FROM producto;
+-- 4 y 9 --
 SELECT nombre AS "nombre de producto",precio AS euros,CAST (precio*1.18 AS DECIMAL(5,2)) AS dolares FROM producto;
-SELECT UPPER(nombre) AS "nombre de producto",precio AS euros,CAST (precio*1.18 AS DECIMAL(5,2)) AS dolares FROM producto;
-SELECT LOWER(nombre) AS "nombre de producto",precio AS euros,CAST (precio*1.18 AS DECIMAL(5,2)) AS dolares FROM producto;
+SELECT UPPER(nombre) AS "nombre de producto",precio AS euros, CAST(precio*1.18 AS DECIMAL(5,2)) AS dolares FROM producto;
+SELECT LOWER(nombre) AS "nombre de producto",precio AS euros, CAST(precio*1.18 AS DECIMAL(5,2)) AS dolares FROM producto;
 SELECT nombre, UPPER(SUBSTRING(nombre,1,2)) FROM fabricante
+SELECT nombre, CAST(precio AS DECIMAL(5,0)) FROM producto;
+
+-- Datos de la tabla
+SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'producto';
+
+--11--
+SELECT DISTINCT codigo_fabricante from producto;
+SELECT codigo_fabricante from producto ORDER BY codigo_fabricante;
+SELECT codigo_fabricante from producto ORDER BY codigo_fabricante DESC;
+SELECT nombre, precio from producto ORDER BY nombre;
+SELECT nombre, precio from producto ORDER BY precio DESC;
+SELECT TOP 5 * from fabricante;
+--SELECT TOP 3 FROM (SELECT TOP 6 * from fabricante);
+SELECT TOP 1 nombre, precio from producto ORDER BY precio;
+SELECT TOP 1 nombre, precio from producto ORDER BY precio DESC;
+SELECT nombre, precio from producto WHERE codigo_fabricante=2;
+SELECT nombre, precio from producto WHERE precio <= 120;
+SELECT nombre, precio from producto WHERE precio <= 300 AND precio >= 80
