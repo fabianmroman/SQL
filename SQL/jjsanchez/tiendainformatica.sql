@@ -57,9 +57,25 @@ SELECT codigo_fabricante from producto ORDER BY codigo_fabricante DESC;
 SELECT nombre, precio from producto ORDER BY nombre;
 SELECT nombre, precio from producto ORDER BY precio DESC;
 SELECT TOP 5 * from fabricante;
---SELECT TOP 3 FROM (SELECT TOP 6 * from fabricante);
+SELECT nombre FROM fabricante ORDER BY codigo OFFSET 3 ROWS FETCH FIRST 3 ROWS ONLY;
 SELECT TOP 1 nombre, precio from producto ORDER BY precio;
 SELECT TOP 1 nombre, precio from producto ORDER BY precio DESC;
 SELECT nombre, precio from producto WHERE codigo_fabricante=2;
-SELECT nombre, precio from producto WHERE precio <= 120;
-SELECT nombre, precio from producto WHERE precio <= 300 AND precio >= 80
+SELECT nombre, precio from producto WHERE precio <= 120; --21--
+SELECT nombre, precio FROM producto WHERE precio >= 400;
+SELECT nombre, precio FROM producto WHERE precio < 400;
+SELECT nombre, precio FROM producto WHERE precio >= 80 AND precio <= 300;
+SELECT nombre, precio FROM producto WHERE precio BETWEEN 60 AND 200;
+SELECT nombre, precio, codigo_fabricante FROM producto WHERE precio >= 200 AND codigo_fabricante = 6;
+-- SELECT COUNT(*) FROM producto;
+SELECT nombre, precio, codigo_fabricante FROM producto WHERE codigo_fabricante=1 OR codigo_fabricante=3 OR codigo_fabricante=5;
+SELECT nombre, precio, codigo_fabricante FROM producto WHERE codigo_fabricante IN (1,3,5);
+SELECT nombre, precio*100 AS centimos FROM producto;
+SELECT nombre FROM fabricante WHERE nombre LIKE 's%';
+SELECT nombre FROM fabricante WHERE nombre LIKE '%e';
+SELECT nombre FROM fabricante WHERE nombre LIKE '%w%';
+SELECT nombre FROM fabricante WHERE nombre LIKE '____';
+SELECT nombre FROM producto WHERE nombre LIKE '%Portátil%';
+SELECT nombre FROM producto WHERE nombre LIKE '%Monitor%' AND precio < 215;
+SELECT nombre, precio FROM producto WHERE precio >= 215 ORDER BY precio DESC;
+SELECT nombre, precio FROM producto WHERE precio >= 215 ORDER BY nombre;
