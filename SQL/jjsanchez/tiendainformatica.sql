@@ -79,3 +79,6 @@ SELECT nombre FROM producto WHERE nombre LIKE '%Portátil%';
 SELECT nombre FROM producto WHERE nombre LIKE '%Monitor%' AND precio < 215;
 SELECT nombre, precio FROM producto WHERE precio >= 215 ORDER BY precio DESC;
 SELECT nombre, precio FROM producto WHERE precio >= 215 ORDER BY nombre;
+
+-- Con tablas combinadas 
+SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo;
