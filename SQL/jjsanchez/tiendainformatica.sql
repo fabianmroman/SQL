@@ -1,4 +1,5 @@
 -- Ejercicio 1.1: Tienda de informatica 
+-- Escrito para ejecutarse en T-SQL
 
 CREATE TABLE fabricante (
   codigo INT IDENTITY(1,1) PRIMARY KEY,
