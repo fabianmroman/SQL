@@ -105,3 +105,14 @@ SELECT fabricante.nombre, producto.nombre FROM producto RIGHT JOIN fabricante ON
   WHERE producto.nombre IS NULL;
 --3: No, todo producto tiene un fabricante relacionado, porque siempre el codigo de producto referencia a una foreign key 
 --   FOREIGN KEY (codigo_fabricante) REFERENCES fabricante(codigo)
+                                      
+-- Consulta propias de integracion 
+SELECT fabricante.nombre as fabricante, COUNT(fabricante.nombre) AS 'numero de productos'FROM producto INNER JOIN
+fabricante ON producto.codigo_fabricante = fabricante.codigo GROUP BY fabricante.nombre
+ORDER BY 'numero de productos';
+
+SELECT fabricante.nombre as fabricante, COUNT(fabricante.nombre) AS 'numero de productos' FROM producto INNER JOIN
+fabricante ON producto.codigo_fabricante = fabricante.codigo GROUP BY fabricante.nombre
+HAVING COUNT(fabricante.nombre) = '2';
+
+SELECT COUNT(*) FROM producto; 
