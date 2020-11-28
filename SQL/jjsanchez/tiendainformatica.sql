@@ -86,5 +86,41 @@ SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabric
 SELECT producto.codigo, producto.nombre, codigo_fabricante, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo;
 SELECT TOP 1 producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY precio;
 SELECT TOP 1 producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY precio DESC;
+
+-- Con subqueries en WHERE
+SELECT MAX(precio) AS precio from producto; 
+
+SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN
+fabricante ON producto.codigo_fabricante = fabricante.codigo WHERE
+precio IN (SELECT MIN(precio) FROM producto);
+
+SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN
+fabricante ON producto.codigo_fabricante = fabricante.codigo WHERE
+precio IN (SELECT MAX(precio) FROM producto);
+-- 
+
 SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo WHERE fabricante.nombre = 'Lenovo';
 SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo WHERE fabricante.nombre = 'Crucial' AND precio > '200';
+SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo
+WHERE fabricante.nombre = 'Asus' OR fabricante.nombre = 'Hewlett-Packard' OR fabricante.nombre = 'Seagate';
+
+--9--
+SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo
+WHERE fabricante.nombre IN ('Asus', 'Hewlett-Packard', 'Seagate');
+
+SELECT producto.nombre, precio FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo
+WHERE fabricante.nombre LIKE '%e';
+
+SELECT producto.nombre, precio FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo
+WHERE fabricante.nombre LIKE '%w%';
+
+SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo
+WHERE precio >= '180' ORDER BY precio DESC;
+
+SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo
+WHERE precio >= '180' ORDER BY producto.nombre;
+
+-- 13 - RIGHT JOIN -- 
+-- subquery de prueba
+SELECT * FROM (SELECT fabricante.codigo, fabricante.nombre FROM producto RIGHT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo) subquery1;
+-- (falta poder hacerla con el DISTINCT)
