@@ -117,3 +117,39 @@ fabricante ON producto.codigo_fabricante = fabricante.codigo GROUP BY fabricante
 HAVING COUNT(fabricante.nombre) = '2';
 
 SELECT COUNT(*) FROM producto; 
+                                      
+                                      
+                                      
+-- 1.1.6 Consultas resumen
+
+SELECT COUNT(*) AS 'Total Productos' FROM producto; 
+SELECT COUNT(*) AS 'Total Fabricantes' FROM fabricante; 
+SELECT COUNT(*) AS 'Fabricantes en stock' FROM (SELECT DISTINCT codigo_fabricante FROM producto) AS subquery1; 
+SELECT CAST(AVG(precio) AS DECIMAL(5,2)) AS 'Media precios' FROM producto;
+SELECT MIN(precio) AS 'Precio mas barato' FROM producto;
+SELECT MAX(precio) AS 'Precio mas caro' FROM producto; 
+SELECT nombre, precio FROM producto WHERE precio = (SELECT MIN(precio)FROM producto); 
+SELECT nombre, precio FROM producto WHERE precio = (SELECT MAX(precio)FROM producto); 
+SELECT SUM(precio) AS Suma FROM producto;
+
+-- Con subqueries
+SELECT COUNT(*) AS 'Cantidad productos Asus' FROM producto 
+  WHERE codigo_fabricante = (SELECT codigo FROM fabricante WHERE nombre = 'Asus');
+-- con JOIN
+SELECT COUNT(*) AS 'Cantidad productos Asus' FROM producto INNER JOIN fabricante
+  ON codigo_fabricante = fabricante.codigo WHERE fabricante.nombre = 'Asus';
+  
+SELECT AVG(precio) AS 'Media precios Asus' FROM producto INNER JOIN fabricante
+  ON codigo_fabricante = fabricante.codigo WHERE fabricante.nombre = 'Asus';
+  
+SELECT MIN(precio) AS 'Mas barato Asus' FROM producto INNER JOIN fabricante
+  ON codigo_fabricante = fabricante.codigo WHERE fabricante.nombre = 'Asus';
+  
+SELECT MAX(precio) AS 'Mas caro Asus' FROM producto INNER JOIN fabricante
+  ON codigo_fabricante = fabricante.codigo WHERE fabricante.nombre = 'Asus';
+  
+SELECT SUM(precio) AS 'Suma precios Asus' FROM producto INNER JOIN fabricante
+  ON codigo_fabricante = fabricante.codigo WHERE fabricante.nombre = 'Asus';
+  
+SELECT MAX(precio) AS MAX, MIN(precio) AS MIN, AVG(precio) AS AVG, COUNT(*) AS TOTAL FROM producto INNER JOIN fabricante
+  ON codigo_fabricante = fabricante.codigo WHERE fabricante.nombre = 'Crucial';                                      
