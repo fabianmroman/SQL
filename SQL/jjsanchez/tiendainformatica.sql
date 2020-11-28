@@ -58,32 +58,6 @@ SELECT nombre, precio from producto ORDER BY nombre;
 SELECT nombre, precio from producto ORDER BY precio DESC;
 SELECT TOP 5 * from fabricante;
 SELECT nombre FROM fabricante ORDER BY codigo OFFSET 3 ROWS FETCH FIRST 3 ROWS ONLY;
-SELECT TOP 1 nombre, precio from producto ORDER BY precio;
-SELECT TOP 1 nombre, precio from producto ORDER BY precio DESC;
-SELECT nombre, precio from producto WHERE codigo_fabricante=2;
-SELECT nombre, precio from producto WHERE precio <= 120; --21--
-SELECT nombre, precio FROM producto WHERE precio >= 400;
-SELECT nombre, precio FROM producto WHERE precio < 400;
-SELECT nombre, precio FROM producto WHERE precio >= 80 AND precio <= 300;
-SELECT nombre, precio FROM producto WHERE precio BETWEEN 60 AND 200;
-SELECT nombre, precio, codigo_fabricante FROM producto WHERE precio >= 200 AND codigo_fabricante = 6;
--- SELECT COUNT(*) FROM producto;
-SELECT nombre, precio, codigo_fabricante FROM producto WHERE codigo_fabricante=1 OR codigo_fabricante=3 OR codigo_fabricante=5;
-SELECT nombre, precio, codigo_fabricante FROM producto WHERE codigo_fabricante IN (1,3,5);
-SELECT nombre, precio*100 AS centimos FROM producto;
-SELECT nombre FROM fabricante WHERE nombre LIKE 's%';
-SELECT nombre FROM fabricante WHERE nombre LIKE '%e';
-SELECT nombre FROM fabricante WHERE nombre LIKE '%w%';
-SELECT nombre FROM fabricante WHERE nombre LIKE '____';
-SELECT nombre FROM producto WHERE nombre LIKE '%Portátil%';
-SELECT nombre FROM producto WHERE nombre LIKE '%Monitor%' AND precio < 215;
-SELECT nombre, precio FROM producto WHERE precio >= 215 ORDER BY precio DESC;
-SELECT nombre, precio FROM producto WHERE precio >= 215 ORDER BY nombre;
-
--- Con tablas combinadas 
-SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo;
-SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY producto.nombre;
-SELECT producto.codigo, producto.nombre, codigo_fabricante, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo;
 SELECT TOP 1 producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY precio;
 SELECT TOP 1 producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY precio DESC;
 
@@ -120,7 +94,14 @@ WHERE precio >= '180' ORDER BY precio DESC;
 SELECT producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo
 WHERE precio >= '180' ORDER BY producto.nombre;
 
--- 13 - RIGHT JOIN -- 
--- subquery de prueba
-SELECT * FROM (SELECT fabricante.codigo, fabricante.nombre FROM producto RIGHT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo) subquery1;
--- (falta poder hacerla con el DISTINCT)
+-- 13
+SELECT DISTINCT fabricante.codigo, fabricante.nombre FROM producto INNER JOIN
+  fabricante ON producto.codigo_fabricante = fabricante.codigo;
+  
+--1.1.5 Consultas multitabla 
+
+SELECT fabricante.nombre, producto.nombre FROM producto RIGHT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo;
+SELECT fabricante.nombre, producto.nombre FROM producto RIGHT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo
+  WHERE producto.nombre IS NULL;
+--3: No, todo producto tiene un fabricante relacionado, porque siempre el codigo de producto referencia a una foreign key 
+--   FOREIGN KEY (codigo_fabricante) REFERENCES fabricante(codigo)
