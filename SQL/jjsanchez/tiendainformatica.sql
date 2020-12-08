@@ -124,7 +124,11 @@ SELECT COUNT(*) FROM producto;
 
 SELECT COUNT(*) AS 'Total Productos' FROM producto; 
 SELECT COUNT(*) AS 'Total Fabricantes' FROM fabricante; 
+                                      
 SELECT COUNT(*) AS 'Fabricantes en stock' FROM (SELECT DISTINCT codigo_fabricante FROM producto) AS subquery1; 
+-- Improved query syntax
+SELECT COUNT(DISTINCT codigo_fabricante) AS 'Fabricantes en stock' FROM producto;
+                                      
 SELECT CAST(AVG(precio) AS DECIMAL(5,2)) AS 'Media precios' FROM producto;
 SELECT MIN(precio) AS 'Precio mas barato' FROM producto;
 SELECT MAX(precio) AS 'Precio mas caro' FROM producto; 
