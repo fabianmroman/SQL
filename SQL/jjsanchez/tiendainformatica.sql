@@ -57,10 +57,10 @@ SELECT codigo_fabricante from producto ORDER BY codigo_fabricante;
 SELECT codigo_fabricante from producto ORDER BY codigo_fabricante DESC;
 SELECT nombre, precio from producto ORDER BY nombre;
 SELECT nombre, precio from producto ORDER BY precio DESC;
-SELECT TOP 5 * from fabricante;
+SELECT TOP(5) * from fabricante;
 SELECT nombre FROM fabricante ORDER BY codigo OFFSET 3 ROWS FETCH FIRST 3 ROWS ONLY;
-SELECT TOP 1 producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY precio;
-SELECT TOP 1 producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY precio DESC;
+SELECT TOP(1) producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY precio;
+SELECT TOP(1) producto.nombre, precio, fabricante.nombre FROM producto LEFT JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo ORDER BY precio DESC;
 
 -- Con subqueries en WHERE
 SELECT MAX(precio) AS precio from producto; 
