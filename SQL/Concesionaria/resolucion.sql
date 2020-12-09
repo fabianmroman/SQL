@@ -1,9 +1,7 @@
 --Resolucion final
 
 --1--
-SELECT Cliente.sNombre, ItemFactura.nCantidad, ItemFactura.nImporteItem, 
-
-Factura.dFecha
+SELECT Cliente.sNombre, ItemFactura.nCantidad, ItemFactura.nImporteItem, Factura.dFecha
 
 FROM 
   Cliente INNER JOIN Factura ON Cliente.nIdCliente = Factura.nIdcliente
@@ -35,7 +33,8 @@ FROM
   ItemFactura ON Factura.nIdFactura = ItemFactura.nIdFactura
   
 WHERE 
-  Factura.dFecha >= CAST(DATEADD(MONTH, -3, GETDATE()) AS DATE AND Factura.dFecha < CAST(GETDATE() AS DATE)
+  Factura.dFecha >= CAST(DATEADD(MONTH, -3, GETDATE()) AS DATE AND 
+  Factura.dFecha < CAST(GETDATE() AS DATE)
 
 GROUP BY 
   Cliente.nIdcliente
