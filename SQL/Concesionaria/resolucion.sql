@@ -1,4 +1,4 @@
---Eesolucion final
+--Resolucion final
 
 --1--
 SELECT Cliente.sNombre, ItemFactura.nCantidad, ItemFactura.nImporteItem, 
