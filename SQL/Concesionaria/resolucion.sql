@@ -1,29 +1,31 @@
---Primera resolucion, contiene errores o cosas para mejorar
+--Eesolucion final
 
 --1--
-DECLARE @idRojo AS INT;
-DECLARE @idFord AS INT;
-SET @idRojo = (SELECT nIDColor FROM Color WHERE UPPER(sDescripcion) = 'ROJO');
-SET @idFord = (SELECT nIDMarca FROM Marca WHERE UPPER(sDescripcion) = 'FORD');
+SELECT Cliente.sNombre, ItemFactura.nCantidad, ItemFactura.nImporteItem, 
 
-SELECT c.sNombre, iFact.nCantidad, iFact.nImporteItem, fact.dFecha
+Factura.dFecha
 
 FROM 
-  cliente AS c
-  RIGHT JOIN Factura AS fact ON c.nIdCliente = fact.nIdcliente
-  RIGHT JOIN ItemFactura AS iFact ON fact.nIDFactura = iFact.nIdFactura
+  Cliente INNER JOIN Factura ON Cliente.nIdCliente = Factura.nIdcliente
+          INNER JOIN ItemFactura ON Factura.nIdFactura = ItemFactura.nIdFactura
+	  INNER JOIN Auto ON ItemFactura.nidAuto = Auto.nIDAuto
+	  INNER JOIN Marca ON Auto.nIDMarca = Marca.nIDMarca
+	  INNER JOIN Color ON Auto.nIDColor = Color.nIDColor
 
 WHERE 
-  nIDAuto IN (SELECT nIdAuto FROM Auto WHERE nIDMarca = @idFord AND nIdcolor = @idRojo AND SIDPatente >= 'AAA001')
-AND
-  dFecha BETWEEN 20000301 AND 20010531;
-  
-  
+    UPPER(Color.sDescripcion) = 'ROJO'
+  AND
+    UPPER(Marca.sDescripcion) = 'FORD'
+  AND 
+    Auto.SIDPatente >= 'AAA001'
+  AND 
+    Factura.dFecha BETWEEN '20000301' AND '20010531'; 
+
   
   
 
 --2--
-SELECT Cliente.sNombre, SUM(nCantidad) AS Cantidad, SUM(nImporteItem * nCantidad) AS Total
+SELECT Cliente.sNombre, SUM(nCantidad) AS Cantidad, SUM(nImporteItem) AS Total
 
 FROM 
   Cliente 
@@ -33,18 +35,21 @@ FROM
   ItemFactura ON Factura.nIdFactura = ItemFactura.nIdFactura
   
 WHERE 
-  Factura.dFecha >= CONVERT(VARCHAR(8), CAST(DATEADD(MONTH, -3, GETDATE()) AS DATE),112) AND Factura.dFecha < CONVERT(VARCHAR(8), CAST(GETDATE() AS DATE),112);
+  Factura.dFecha >= CAST(DATEADD(MONTH, -3, GETDATE()) AS DATE AND Factura.dFecha < CAST(GETDATE() AS DATE)
 
 GROUP BY 
   Cliente.nIdcliente
 
 HAVING
-  SUM(nImporteItem * nCantidad) > 10000;
+  SUM(nImporteItem) > '10000';
+  
+  
   
   
 --3--
+--Puede ser hecho con INNER JOIN tambien
 UPDATE Valor
-SET nValor = nValor * 1,15
+SET nValor = nValor * 1.15
 WHERE nIDAuto IN (
   SELECT Auto.nIDAuto
   FROM 
