@@ -33,7 +33,7 @@ FROM
   ItemFactura ON Factura.nIdFactura = ItemFactura.nIdFactura
   
 WHERE 
-  Factura.dFecha >= CAST(DATEADD(MONTH, -3, GETDATE()) AS DATE AND 
+  Factura.dFecha >= CAST(DATEADD(MONTH, -3, GETDATE()) AS DATE) AND 
   Factura.dFecha < CAST(GETDATE() AS DATE)
 
 GROUP BY 
