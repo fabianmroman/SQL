@@ -1,12 +1,11 @@
-# Ejercicios en T-SQL 
+## Ejercicios en T-SQL 
 
-# SQL
-#Previo:
+#### Previo:
 Antes del curso de Educación IT. Comencé usando cursos de LinkedIn, consultando, por mi cuenta y leyendo el libro de la certificación 70-761 de Microsoft. 
 Hay errores y buenas prácticas que desconocía, principalmente con el código y el uso de alias, que preferí dejar para evidenciar el avance en los siguientes ejercicios. 
 
-#Actual: 
+#### Actual: 
 Ejercicios del curso de Fundamentos de Programación en SQL Server 2019 de Educación IT y próximos por hacer.
 
-#Carpeta Git
-Pruebas de Git realizadas en el repositorio
+#### PruebasGit
+Pruebas de Git realizadas en el repositorio.
