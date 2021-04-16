@@ -1,8 +1,12 @@
-# Repositorio con ejercicios para Desarrollo y Data Science
+# Ejercicios en T-SQL 
 
-- Python 
-- R
-- Git
-- SQL - T-SQL
+# SQL
+#Previo:
+Antes del curso de Educación IT. Comencé usando cursos de LinkedIn, consultando, por mi cuenta y leyendo el libro de la certificación 70-761 de Microsoft. 
+Hay errores y buenas prácticas que desconocía, principalmente con el código y el uso de alias, que preferí dejar para evidenciar el avance en los siguientes ejercicios. 
 
-TO DO: Mover los repositorios Python y R como subcarpetas de este repositorio
+#Actual: 
+Ejercicios del curso de Fundamentos de Programación en SQL Server 2019 de Educación IT y próximos por hacer.
+
+#Carpeta Git
+Pruebas de Git realizadas en el repositorio
